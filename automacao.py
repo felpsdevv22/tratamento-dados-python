@@ -4,25 +4,26 @@ def carregar_dados():
     try: 
         return pd.read_csv("dados.csv")
     except Exception as e:
-       print("Erro ao carregar arquivo: ", e)
-       return None
+        print("Erro ao carregar arquivo: ", e)
+        return None
 
 df = carregar_dados()
 
 if df is not None:
     print("Dados carregados com sucesso")    
+ 
+    antes = len(df)
 
-antes = len(df)
+    df =df.drop_duplicates()
 
-df =df.drop_duplicates()
+    if 'email' in df.columns:
+        df = df[df['email'].str.contains('@')]
 
-df = df[df['email'].str.contains('@')]
+    depois = len(df)
 
-depois = len(df)
+    df.to_excel("dados_tratados.xlsx", index=False)
 
-df.to_excel("dados_tratados.xlsx", index=False)
-
-print("✅ Processo concluido")
-print(f"Registros originais: {antes}")
-print(f"Registros finais: {depois}")
+    print("✅ Processo concluido")
+    print(f"Registros originais: {antes}")
+    print(f"Registros finais: {depois}")
 
