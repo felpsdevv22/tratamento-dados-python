@@ -4,7 +4,7 @@ import pandas as pd
 from cleaner import limpar_dados
 from io import BytesIO
 
-st.title("Sistema de tratamento de dados")
+st.title("NexData - Sistema de tratamento de dados")
 
 arquivo = st.file_uploader(
     "Envie um arquivo Excel ou CSV"
